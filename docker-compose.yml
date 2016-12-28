@@ -3,6 +3,7 @@ services:
   web_models:
     image: rspec-rails-examples
     working_dir: /app
+    command: 'rspec spec/models'
     links:
       - postgresmodels
     environment:
@@ -12,6 +13,8 @@ services:
     image: postgres
   web_controllers:
     image: rspec-rails-examples
+    working_dir: /app
+    command: 'rspec spec/controllers'
     links:
       - postgrescontrollers
     environment:
