@@ -2,23 +2,20 @@ version: '2'
 services:
   web_models:
     image: rspec-rails-examples
-    command: 'rspec spec/models'
-    entrypoint: ''
+    working_dir: /app
     links:
-      - postgres_models
+      - postgresmodels
     environment:
       RAILS_ENV: 'test'
-      DATABASE_URL: 'postgres://postgres:@postgres_models:5432/rspec_test'
-  postgres_models:
+      DATABASE_URL: 'postgres://postgres:@postgresmodels:5432/rspec_test'
+  postgresmodels:
     image: postgres
   web_controllers:
     image: rspec-rails-examples
-    command: 'rspec spec/models'
-    entrypoint: ''
     links:
-      - postgres_controllers
+      - postgrescontrollers
     environment:
       RAILS_ENV: 'test'
-      DATABASE_URL: 'postgres://postgres:@postgres_controllers:5432/rspec_test'
-  postgres_controllers:
+      DATABASE_URL: 'postgres://postgres:@postgrescontrollers:5432/rspec_test'
+  postgrescontrollers:
     image: postgres
