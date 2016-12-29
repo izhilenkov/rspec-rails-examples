@@ -8,16 +8,17 @@ services:
       - postgresmodels
     environment:
       RAILS_ENV: 'test'
+      DATABASE_URL: 'postgres://postgres:@postgresmodels:5432/rspec_test'
   postgresmodels:
     image: postgres
   web_controllers:
     image: rspec-rails-examples
-    working_dir: /app
-    command: 'rspec spec/controllers'
+    command: 'rspec spec/models'
     links:
       - postgrescontrollers
     environment:
       RAILS_ENV: 'test'
+      DATABASE_URL: 'postgres://postgres:@postgrescontrollers:5432/rspec_test'
   postgrescontrollers:
     image: postgres
   web_tasks:
@@ -28,6 +29,7 @@ services:
       - postgrescontrollers
     environment:
       RAILS_ENV: 'test'
+      DATABASE_URL: 'postgres://postgres:@postgrescontrollers:5432/rspec_test'
   web_jobs:
     image: rspec-rails-examples
     working_dir: /app
@@ -36,3 +38,4 @@ services:
       - postgresmodels
     environment:
       RAILS_ENV: 'test'
+      DATABASE_URL: 'postgres://postgres:@postgresmodels:5432/rspec_test'
