@@ -23,7 +23,7 @@ node('docker-node') {
                 sh "docker-compose up web_models"
             }
         )
-    },
+    }
     stage("run tests in parallel") {
       parallel(
           jobs : {
