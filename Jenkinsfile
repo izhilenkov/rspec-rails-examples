@@ -22,15 +22,17 @@ node('docker-node') {
             models : {
                 sh "docker-compose up web_models"
             }
-        ),
-        parallel(
-            jobs : {
-                sh "docker-compose up web_jobs"
-            },
-            tasks : {
-                sh "docker-compose up web_tasks"
-            }
         )
+    },
+    stage("run tests in parallel") {
+      parallel(
+          jobs : {
+              sh "docker-compose up web_jobs"
+          },
+          tasks : {
+              sh "docker-compose up web_tasks"
+          }
+      )
     }
     stage("clean up  containers") {
         sh "docker-compose stop"
